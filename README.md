@@ -1,5 +1,5 @@
 #### ADONISJS 5 DO INICIANTE AO PROFISSIONAL
-AULA 78 - Formatar as páginas de detalhes das tarefas
+AULA 80 - Edit markup of edit view form
 # Iniciar um projeto adonis
 npm init adonijs-tx-app@latest
 

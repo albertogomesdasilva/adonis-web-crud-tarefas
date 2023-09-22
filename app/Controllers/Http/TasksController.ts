@@ -9,10 +9,8 @@ export default class TasksController {
     try {
           const user = await User.getAllTaskByUserId(auth.user!.id)
 
-           console.log(user.tasks)
-            console.log(user.tasks[0].$attributes.title)
 
-          const html = await view.render('tasks/index', { tasks: user.tasks })
+          const html = await view.render('task/index', { tasks: user.tasks })
           return html
 
     } catch (error) {
@@ -24,7 +22,7 @@ export default class TasksController {
   }
 
   public create =async ({ view }:HttpContextContract) => {
-    const html = await view.render('tasks/create')
+    const html = await view.render('task/create')
     return html
   }
 
@@ -52,13 +50,28 @@ export default class TasksController {
       // console.log(params, id)
       try {
         const task = await Task.findOrFail(id)
-        const html = await view.render('tasks.show', { task })
+        const html = await view.render('task.show', { task })
         return html
 
       }catch(error) {
         console.error(error)
         session.flash('error', error.message)
         return response.redirect().back()
+      }
+    }
+
+    public edit =async ( { params, session, response, view }:HttpContextContract) => {
+      const { id } = params
+
+      try{
+        const task = await Task.findOrFail(id)
+        const html = await view.render('task.edit', { task })
+        return html
+      }catch(error) {
+        console.error(error)
+        session.flash('error', error.message)
+        return response.redirect().back()
+
       }
     }
 
