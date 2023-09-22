@@ -1,0 +1,71 @@
+@layout('layouts/main')
+
+@set('title', 'Editar Tarefa')
+
+@section('content')
+    <div class="container">
+
+        <h1>Editar Tarefa - Id:  {{ task.id}} </h1>
+
+        {{ task.title}}
+        {{ task.description}}
+        {{ task.priority}}
+
+       
+        <div class="container">
+            <h4 class="fs-4 fw-bold text-center my-5">Editar Tarefa</h4>
+
+           {{--  {{ inspect(flashMessages.all()) }}    --}}
+
+
+
+            <div class="row flex-column align-items-center">
+                <div class="col-6 col-md5 col-lg-3 col-xl-5">
+                    <form action="{{ route('task.store')}}" method="post">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control {{ flashMessages.has('errors.title') && 'is-invalid' }}" placeholder="Título da Tarefa" name="title" value="{{ task.title }}" required >
+                            <label for="floatingInput">Título da Tarefa</label>
+                            @if(flashMessages.has('errors.title'))
+                            <p class="fs-6 text-danger mb-0">
+                                {{ flashMessages.get('errors.title' )}}
+                            </p>
+                            @endif
+                        </div>
+                       
+                     
+                        <div class="form-floating mb-3">
+                            <textarea class="form-control {{ flashMessages.has('errors.description') && 'is-invalid'}}" name="description" placeholder="Digite a descrição da Tarefa" id="floatingTextarea2"
+                            style="height: 100px" value="{{ flashMessages.get('description', '')}}" required>{{ task.description }}</textarea>
+                            <label for="floatingTextarea2">Descrição da Tarefa</label>
+                            @if(flashMessages.has('errors.description'))
+                            <p class="fs-6 text-danger mb-0">
+                                {{ flashMessages.get('errors.description', )}}
+                            </p>
+                            @endif
+                        </div>
+
+                        <div class="form-floating">
+                            <select name="priority" id="floatingSelect" class="form-select  {{ flashMessages.has('errors.priority') && 'is-invalid'}}" aria-label="Floating label select example" required>
+                                <option selected>{{ task.priority }}</option>
+                                <option value="important">Important</option>
+                                <option value="unimportat">Unimportant</option>
+                                <option value="urgent">Urgent</option>
+                                <option value="future_scope">Future Scope</option>
+                            </select>
+                            <label for="floatingSelect">Priority</label>
+                            @if(flashMessages.has('errors.priority'))
+                            <p class="fs-6 text-danger mb-0">
+                                {{ flashMessages.get('errors.priority', )}}
+                            </p>
+                            @endif
+                        </div>
+
+                        <button type="submit" class="btn btn-primary mt-3">Atualizar</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+@end

@@ -1,0 +1,17 @@
+<div>
+    @if(priority === 'important')
+        <span class="badge text-bg-success fs-6">{{ priority }}</span>
+    @endif
+
+    @if(priority === 'unimportant')
+        <span class="badge text-bg-primary fs-6">{{ priority }}</span>
+    @endif
+
+    @if(priority === 'urgent')
+        <span class="badge text-bg-warning fs-6">{{ priority }}</span>
+    @endif
+
+    @if(priority === 'future_scope')
+        <span class="badge text-bg-danger fs-6">{{ priority }}</span>
+    @endif
+  </div>

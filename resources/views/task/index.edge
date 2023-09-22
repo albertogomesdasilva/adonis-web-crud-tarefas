@@ -1,0 +1,54 @@
+@layout('layouts/main')
+
+@set('title', 'Lista de Tarefas para o usuário')
+
+@section('content')
+
+<div class="container">
+    <div>
+      <h3>Lista de Tarefas para o Usuário: {{auth.user.first_name}} </h3><hr>
+       
+    </div>
+
+  <div class="row">
+
+
+  @each(task in tasks)
+  
+  <div class="col-12 col-md-6 col-lg-4 g3">
+    <div class="card p-4" style="width:18rem">
+
+      <p class="text-capitalize fs-3 fw-bold">
+       
+        {{ task.title }}
+      </p>
+      
+      <p class="text-capitalize fs-5 text-muted">
+        {{ task.description.slice(0, 25) }}
+      </p>
+
+      @component('components/priority', {
+        priority: task.priority
+      })
+      @end 
+
+      <div class="wrapper mt-3">
+        <a href="{{ route('task.show', { id: task.id })  }}" type="button" class="btn btn-info">Show</a>
+        <a href="{{ route('task.edit', { id: task.id })  }}" type="button" class="btn btn-warning">Edit</a>
+        <button type="button" class="btn btn-danger">Danger</button>
+      </div>
+
+    </div>
+    
+  </div>
+  @else
+  <div class="text-center">
+    <p class="fs-4" style="color: red">Não tem tarefas para o usuário logado!!!</p>
+    <a class="btn btn-outline-primary" href="{{route ('task.create')}}">Criar Tarefa</a>
+  </div>
+  @endeach
+  </div>
+
+</div>
+
+@endsection
