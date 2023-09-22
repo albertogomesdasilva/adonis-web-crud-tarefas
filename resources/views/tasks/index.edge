@@ -1,11 +1,67 @@
 @layout('layouts/main')
 
-@set('title', 'Lista de Tarefas')
+@set('title', 'Lista de Tarefas para o usuário')
 
 @section('content')
-    <div class="container mt-5">
-        <h1>Task index - Lista de Tarefas</h1>
+
+<div class="container">
+    <div>
+      <h3>Lista de Tarefas para o Usuário: {{auth.user.first_name}} </h3><hr>
+       
+    </div>
+
+  <div class="row">
+
+  @each(task in tasks)
+  
+  <div class="col-12 col-md-6 col-lg-4 g3">
+    <div class="card p-4" style="width:18rem">
+
+      <p class="text-capitalize fs-3 fw-bold">
+       
+        {{ task.title }}
+      </p>
+      
+      <p class="text-capitalize fs-5 text-muted">
+        {{ task.description.slice(0, 25) }}
+      </p>
+
+      <div>
+        @if(task.priority === 'important')
+            <span class="badge text-bg-success fs-6">{{ task.priority }}</span>
+        @endif
+        @if(task.priority === 'unimportant')
+            <span class="badge text-bg-primary fs-6">{{ task.priority }}</span>
+        @endif
+        @if(task.priority === 'urgent')
+            <span class="badge text-bg-warning fs-6">{{ task.priority }}</span>
+        @endif
+        @if(task.priority === 'future_scope')
+            <span class="badge text-bg-danger fs-6">{{ task.priority }}</span>
+        @endif
+      </div>
+
+      <div class="wrapper mt-3">
+        <a href="{{ route('task.show', { id: task.id })  }}" type="button" class="btn btn-info">Show</a>
+        <button type="button" class="btn btn-warning">Warning</button>
+        <button type="button" class="btn btn-danger">Danger</button>
+      </div>
 
     </div>
-  
+    
+  </div>
+    
+  @else
+    <div class="text-center">
+      <p class="fs-4" style="color: red">Não tem tarefas para o usuário logado!!!</p>
+      <a class="btn btn-outline-primary" href="{{route ('task.create')}}">Criar Tarefa</a>
+    </div>
+  @endeach
+ 
+</div>
+
+  </div>
+
+</div>
+
 @endsection

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80001
 File Encoding         : 65001
 
-Date: 2023-09-21 18:47:42
+Date: 2023-09-22 10:58:51
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -25,12 +25,13 @@ CREATE TABLE `adonis_schema` (
   `batch` int(11) NOT NULL,
   `migration_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of adonis_schema
 -- ----------------------------
 INSERT INTO `adonis_schema` VALUES ('1', 'database/migrations/1695073913682_users', '1', '2023-09-19 16:01:19');
+INSERT INTO `adonis_schema` VALUES ('2', 'database/migrations/1695327771914_tasks', '2', '2023-09-22 10:36:38');
 
 -- ----------------------------
 -- Table structure for `adonis_schema_versions`
@@ -44,6 +45,30 @@ CREATE TABLE `adonis_schema_versions` (
 -- Records of adonis_schema_versions
 -- ----------------------------
 INSERT INTO `adonis_schema_versions` VALUES ('2');
+
+-- ----------------------------
+-- Table structure for `tasks`
+-- ----------------------------
+DROP TABLE IF EXISTS `tasks`;
+CREATE TABLE `tasks` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(50) NOT NULL,
+  `description` varchar(400) NOT NULL,
+  `priority` enum('important','unimportant','urgent','future_scope') NOT NULL DEFAULT 'important',
+  `user_id` int(10) unsigned DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  KEY `tasks_user_id_foreign` (`user_id`),
+  CONSTRAINT `tasks_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of tasks
+-- ----------------------------
+INSERT INTO `tasks` VALUES ('1', 'Titulo Adonijs', 'Descrição adonijs', 'important', '8', '2023-09-22 10:38:56', '2023-09-22 10:38:56');
+INSERT INTO `tasks` VALUES ('2', 'dfadfsadf', 'dfadsfasdfasddfadsfdsafasdf', 'important', '8', '2023-09-22 10:43:32', '2023-09-22 10:43:32');
+INSERT INTO `tasks` VALUES ('3', 'Terceira Tarefa', 'desc terce', 'important', '8', '2023-09-22 10:44:51', '2023-09-22 10:44:51');
 
 -- ----------------------------
 -- Table structure for `users`

@@ -19,3 +19,5 @@ Route.get('/logout', 'AuthController.logout').as('logout')
 
 Route.resource('task', 'TasksController')
 
+
+
