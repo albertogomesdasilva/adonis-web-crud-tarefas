@@ -30,6 +30,11 @@
                 <hr>
                     <p class="fw-bold fs-6">Atualizado em:</p>
                     <p class="text-capitalize">{{ task.updatedAt }}</p>
+                <hr>
+                <div class="wrapper mt-3">
+                    <a href="{{ route('task.edit', { id: task.id })  }}" type="button" class="btn btn-warning">Edit</a>
+                    <button type="button" class="btn btn-danger">Danger</button>
+                </div>
 
 
 

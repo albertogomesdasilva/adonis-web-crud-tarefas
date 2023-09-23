@@ -1,5 +1,5 @@
 #### ADONISJS 5 DO INICIANTE AO PROFISSIONAL
-AULA 80 - Edit markup of edit view form
+AULA 84 - Adding auth middleware
 # Iniciar um projeto adonis
 npm init adonijs-tx-app@latest
 

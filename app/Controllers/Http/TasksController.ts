@@ -75,4 +75,38 @@ export default class TasksController {
       }
     }
 
+    public update = async ({ request, params, session, response }: HttpContextContract) => {
+      const { id } = params
+      const payload = await request.validate(CreateTaskValidator)
+
+      try {
+        const result = await Task.updateTask({ 
+          id,
+          title: payload.title, 
+          description: payload.description,
+          priority: payload.priority,
+        })
+        session.flash('success', result)
+        return response.redirect().toRoute('task.show', { id })
+      } catch(error) {
+        console.error(error)
+        session.flash('error', error.message)
+        return response.redirect().back()
+      }
+    }
+
+    public destroy = async ({ params, session, response }: HttpContextContract) => {
+      const { id } = params
+
+      try {
+        const result = await Task.deleteTaskById(id)
+        session.flash('success', result)
+        return response.redirect().toRoute('task.index', { id })
+      } catch(error) {
+        console.error(error)
+        session.flash('error', error.message)
+        return response.redirect().back()
+      }
+    }
+
 }
