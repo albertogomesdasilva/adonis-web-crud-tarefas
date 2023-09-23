@@ -1,5 +1,8 @@
 #### ADONISJS 5 DO INICIANTE AO PROFISSIONAL
-AULA 84 - Adding auth middleware
+1. RENOMEAR O ARQUIVO .env.example para .env e configurar o nome do banco de dados, usuário e senha
+2. node ace migration:run
+3. node ace db:seed ( cria usuários: admin@admin.com com a senha: 12345678)
+3. nmp run dev para rodar em: http://localhost:3333
 # Iniciar um projeto adonis
 npm init adonijs-tx-app@latest
 

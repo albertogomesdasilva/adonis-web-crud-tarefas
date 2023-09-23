@@ -3,6 +3,18 @@ import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
 
 const users = [
   { 
+    email: 'admin@admin.com',
+    password: '123456',
+    first_name: 'Administrador',
+    last_name: 'Administrador do Sistema'
+  },
+  { 
+    email: 'albertogomesdasilva@gmail.com',
+    password: '123456',
+    first_name: 'Alberto',
+    last_name: 'Gomes da Silva'
+  },
+  { 
     email: 'thacylla@gmail.com',
     password: '123456',
     first_name: 'Thácylla',
