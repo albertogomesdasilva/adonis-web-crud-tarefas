@@ -28,6 +28,9 @@
             <div class="row flex-column align-items-center">
                 <div class="col-6 col-md5 col-lg-3 col-xl-5">
                     <form action="{{ route('task.update', { id: task.id }, { qs: {_method: 'PUT'} })  }}" method="post">
+
+                        {{ csrfField()}}
+
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control {{ flashMessages.has('errors.title') && 'is-invalid' }}" placeholder="Título da Tarefa" name="title" value="{{ flashMessages.get('description', 'task.title')}}" required >
                             <label for="floatingInput">Título da Tarefa</label>

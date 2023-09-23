@@ -4,20 +4,27 @@ import Route from '@ioc:Adonis/Core/Route'
    return (await view.render('welcome'))
  })
 
-Route.get('/login', 'AuthController.login').as('login')
+Route.group(() => {
 
- Route.get('/signup', 'AuthController.signup').as('signup')
+  
+  Route.get('/login', 'AuthController.login').as('login')
+  
+  Route.get('/signup', 'AuthController.signup').as('signup')
+  
+  Route.post('/signup', 'AuthController.signPost')
+  
+  //Route.route('/signup', ['GET', 'POST'], 'AuthController.signup').as('signup')
+  
+  
+  Route.post('/login', 'AuthController.loginPost').as('loginPost')
 
- Route.post('/signup', 'AuthController.signPost')
+}).middleware('isGuest')
 
-//Route.route('/signup', ['GET', 'POST'], 'AuthController.signup').as('signup')
+Route.get('/logout', 'AuthController.logout').as('logout').middleware('auth')
 
-
-Route.post('/login', 'AuthController.loginPost').as('loginPost')
-
-Route.get('/logout', 'AuthController.logout').as('logout')
-
-Route.resource('task', 'TasksController')
+Route.resource('task', 'TasksController').middleware({
+  "*": 'auth'
+})
 
 
 

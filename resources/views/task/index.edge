@@ -20,7 +20,7 @@
 
       <p class="text-capitalize fs-3 fw-bold">
        
-        {{ task.title }}
+        {{ task.title.slice(0, 15) }}
       </p>
       
       <p class="text-capitalize fs-5 text-muted">
@@ -31,8 +31,7 @@
         priority: task.priority
       })
       @end 
-
-      <div class="wrapper mt-3">
+      <div class="d-flex justify-content-around mt-3">
         <a href="{{ route('task.show', { id: task.id })  }}" type="button" class="btn btn-info">Show</a>
         <a href="{{ route('task.edit', { id: task.id })  }}" type="button" class="btn btn-warning">Edit</a>
 

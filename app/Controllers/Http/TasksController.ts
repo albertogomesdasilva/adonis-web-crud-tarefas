@@ -45,41 +45,61 @@ export default class TasksController {
 
     }
   }
-    public show =async ({ params, session, response, view }: HttpContextContract) => {
+    public show =async ({ params, session, response, view, bouncer }: HttpContextContract) => {
       const { id } = params
       // console.log(params, id)
       try {
         const task = await Task.findOrFail(id)
+
+        // Autorização
+          await bouncer.authorize('showTask', task)
+        //
+
         const html = await view.render('task.show', { task })
         return html
 
       }catch(error) {
         console.error(error)
         session.flash('error', error.message)
-        return response.redirect().back()
+        // return response.redirect().back()
+        return response.redirect().toRoute('task.index')
       }
     }
 
-    public edit =async ( { params, session, response, view }:HttpContextContract) => {
+    public edit =async ( { params, session, response, view, bouncer }:HttpContextContract) => {
       const { id } = params
 
       try{
         const task = await Task.findOrFail(id)
+
+           // Autorização
+           await bouncer.authorize('editTask', task)
+           //
+
         const html = await view.render('task.edit', { task })
         return html
       }catch(error) {
         console.error(error)
         session.flash('error', error.message)
-        return response.redirect().back()
+        // return response.redirect().back()
+        return response.redirect().toRoute('task.index')
 
       }
     }
 
-    public update = async ({ request, params, session, response }: HttpContextContract) => {
+    public update = async ({ request, params, session, response, bouncer }: HttpContextContract) => {
       const { id } = params
       const payload = await request.validate(CreateTaskValidator)
 
       try {
+
+        const task = await Task.findOrFail(id)
+        
+           // Autorização
+           await bouncer.authorize('editTask', task)
+           //
+
+
         const result = await Task.updateTask({ 
           id,
           title: payload.title, 
@@ -91,14 +111,22 @@ export default class TasksController {
       } catch(error) {
         console.error(error)
         session.flash('error', error.message)
-        return response.redirect().back()
+        // return response.redirect().back()
+        return response.redirect().toRoute('task.index')
       }
     }
 
-    public destroy = async ({ params, session, response }: HttpContextContract) => {
+    public destroy = async ({ params, session, response, bouncer }: HttpContextContract) => {
       const { id } = params
 
       try {
+
+        const task = await Task.findOrFail(id)
+
+        // AUTORIZAÇÃO
+          await bouncer.authorize('destroyTask', task)
+        //
+
         const result = await Task.deleteTaskById(id)
         session.flash('success', result)
         return response.redirect().toRoute('task.index', { id })
