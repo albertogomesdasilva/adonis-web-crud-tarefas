@@ -17,6 +17,7 @@
             <div class="row flex-column align-items-center">
                 <div class="col-12 col-md5 col-lg-4 col-xl-3">
                     <form action="{{ route('signup') }}" method="post">
+                        {{ csrfField()}}
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control {{ flashMessages.has('errors.firstName') && 'is-invalid' }}" placeholder="First Name" name="firstName" value="{{ flashMessages.get('firstName', '' )}}"  >
                             <label for="floatingInput">First Name</label>
