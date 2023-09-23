@@ -1,5 +1,5 @@
 #### ADONISJS 5 DO INICIANTE AO PROFISSIONAL
-1. RENOMEAR O ARQUIVO .env.example para .env e configurar o nome do banco de dados, usuário e senha
+1. RENOMEAR O ARQUIVO .env.example para .env, criar um banco de dados e configurar no .env o nome do banco de dados, usuário e senha
 2. node ace migration:run
 3. node ace db:seed ( cria usuários: admin@admin.com com a senha: 12345678)
 3. nmp run dev para rodar em: http://localhost:3333
