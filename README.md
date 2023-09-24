@@ -3,6 +3,14 @@
 2. node ace migration:run
 3. node ace db:seed ( cria usuários: admin@admin.com com a senha: 12345678)
 3. nmp run dev para rodar em: http://localhost:3333
+
+* npm run build
+* cd build
+* npm ci --production
+* copy .env do projeto para a pasta build
+* cd build
+* node server.js ou pm2 start --name "app" node server.js
+* pm2 save
 # Iniciar um projeto adonis
 npm init adonijs-tx-app@latest
 
