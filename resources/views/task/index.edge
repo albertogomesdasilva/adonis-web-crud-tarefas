@@ -37,6 +37,7 @@
 
         <form action="{{ route('task.destroy', { id: task.id }, { qs: { _method: 'DELETE' } }) }}" method="post"
           onsubmit="return confirm('Tem certeza que deseja excluir o registro?');">
+          {{ csrfField()}}
           <button type="submit" class="btn btn-danger">Del</button>
         </form>
       </div>
